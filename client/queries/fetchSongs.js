@@ -1,6 +1,4 @@
-import gql from 'graphql-tag'
-
-const query = gql`
+const query = `
 	{
 		songs {
 			id
@@ -9,5 +7,7 @@ const query = gql`
 	}
 ` 
 
-export default query
+module.exports = {
+	query
+}
 

@@ -1,33 +1,36 @@
-export const ADD_SONG = 'ADD_SONG'
-export const REMOVE_SONG = 'REMOVE_SONG'
-export const ADD_LYRIC_TO_SONG = 'ADD_LYRIC_TO_SONG'
-export const LIKE_LYRIC = 'LIKE_LYRIC'
+const ADD_SONG = 'ADD_SONG'
+const REMOVE_SONG = 'REMOVE_SONG'
+const ADD_LYRIC = 'ADD_LYRIC'
+//export const LIKE_LYRIC = 'LIKE_LYRIC'
 
-function addSong(title){
+const addSong = (title) => {
 	return {
-		type: ADD_SONG_TITLE,
+		type: ADD_SONG,
 		title
 	}
 }
 
-function removeSong(id){
+const removeSong = (id) => {
 	return {
 		type: REMOVE_SONG,
 		id
 	}
 }
 
-function addLyricToSong(id, content){
+const addLyric = (content, songId) => {
 	return {
-		type: ADD_LYRIC_TO_SONG,
-		songId: id,
-		content
+		type: ADD_LYRIC,
+		content,
+		songId
 	}
 }
 
-function likeLyric(id){
-	return {
-		type: LIKE_LYRIC,
-		id
-	}
+
+module.exports = {
+	ADD_SONG,
+	REMOVE_SONG,
+	ADD_LYRIC,
+	addLyric,
+	addSong,
+	removeSong
 }

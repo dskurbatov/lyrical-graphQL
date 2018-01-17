@@ -1,19 +1,21 @@
 const {
 	ADD_SONG,
 	REMOVE_SONG,
-	ADD_LYRIC_TO_SONG,
-	LIKE_LYRIC
+	ADD_LYRIC
+	// LIKE_LYRIC
 } = require('../actions/sync_actions')
 
-function songReducer(state = [], action){
+let index = 0, lyricId = 0
+
+const songReducer = (state = [], action) => {
+	console.log(state, action)
 	switch(action.type){
 		case ADD_SONG:
 			return [
 				...state,
 				{
-					id: action.id,
-					title: action.title,
-					lyrics: []
+					id: String(index++),
+					title: action.title
 				}
 			]
 		case REMOVE_SONG:
@@ -23,29 +25,43 @@ function songReducer(state = [], action){
 	}
 }
 
-function lyricReducer(state = [], action){
+const lyricReducer = (state = [], action) => {
 	switch(action.type){
-		case ADD_LYRIC_TO_SONG:
+		case ADD_LYRIC:
 			return [
 				...state,
 				{
-					id: action.id,
+					id: String(lyricId++),
 					content: action.content,
 					songId: action.songId,
 					likes: 0
 				}
 			]
-		case LIKE_LYRIC:
-			const index = state.indexof({id: action.id})
-			return [
-				...state.slice(0, index),
-				state[index].likes++,
-				...state.slice(index+ 1, state.length)
-			]
+		// case LIKE_LYRIC:
+		// 	const index = state.indexof({id: action.id})
+		// 	return [
+		// 		...state.slice(0, index),
+		// 		state[index].likes++,
+		// 		...state.slice(index+ 1, state.length)
+		// 	]
+		default:
+			return state
+	}
+}
+
+const appReducer = (state = {}, action) => {
+	return {
+		songs: songReducer(state.songs, action),
+		lyrics: lyricReducer(state.lyrics, action)
 	}
 }
 
 
+module.exports = {
+	songReducer,
+	lyricReducer,
+	appReducer
+}
 
 
 

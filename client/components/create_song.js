@@ -1,52 +1,78 @@
 import React, { Component } from 'react'
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
 import { Link, hashHistory } from 'react-router'
-import query from '../queries/fetchSongs'
+import { connect } from 'react-redux'
+import { query } from '../queries/fetchSongs'
+import { addSong } from '../../redux/actions/sync_actions'
 
-class SongCreate extends Component {
-	constructor(props){
-		super(props)
+const SongCreate = (props) => {
+	let textInput;
 
-		this.state = { title: '' }
-		this.onSubmit = this.onSubmit.bind(this)
-	}
-
-	onSubmit(e){
+	const onClick = (e) => {
 		e.preventDefault()
-		
-		this.props.mutate({
-			variables: { title: this.state.title },
-			refetchQueries: [{ query }]
-		}).then(() => hashHistory.push('/'))
+
+		props.dispatch(addSong(textInput.value))
+
+		hashHistory.push('/')
 	}
 
-
-	render(){
-		return(
-			<div>
-				<Link 
-					to="/"
-				>Back</Link>
-				<h3>Create New Song</h3>
-				<form onSubmit={this.onSubmit}>
-					<label>Song Title:</label>
-					<input 
-						onChange={e => this.setState({ title: e.target.value })}
-						value={this.state.title}
-					/>
-				</form>
-			</div>
-		)
-	}
+	return(
+		<div>
+			<Link 
+				to="/"
+			>Back</Link>
+			<h3>Create New Song</h3>
+			<label>Song Title:</label>
+			<input ref={input => textInput = input} />
+			<button onClick={onClick}>ADD</button>
+		</div>
+	)
 }
 
-const mutation = gql`
-	mutation AddSong($title: String){
-		addSong(title: $title){
-			title
-		}
-	}
-`
+export default connect()(SongCreate)
 
-export default graphql(mutation)(SongCreate)
+// class SongCreate extends Component {
+// 	constructor(props){
+// 		super(props)
+
+// 		this.state = { title: '' }
+// 		this.onSubmit = this.onSubmit.bind(this)
+// 	}
+
+// 	onSubmit(e){
+// 		e.preventDefault()
+		
+// 		this.props.mutate({
+// 			variables: { title: this.state.title },
+// 			refetchQueries: [{ query }]
+// 		}).then(() => hashHistory.push('/'))
+// 	}
+
+
+// 	render(){
+// 		return(
+// 			<div>
+// 				<Link 
+// 					to="/"
+// 				>Back</Link>
+// 				<h3>Create New Song</h3>
+// 				<form onSubmit={this.onSubmit}>
+// 					<label>Song Title:</label>
+// 					<input 
+// 						onChange={e => this.setState({ title: e.target.value })}
+// 						value={this.state.title}
+// 					/>
+// 				</form>
+// 			</div>
+// 		)
+// 	}
+// }
+
+// const mutation = gql`
+// 	mutation AddSong($title: String){
+// 		addSong(title: $title){
+// 			title
+// 		}
+// 	}
+// `
+
+// export default graphql(mutation)(SongCreate)
