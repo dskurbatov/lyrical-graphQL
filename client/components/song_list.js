@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import { fetchAllSongs, asyncRemoveSong } from '../../redux/actions/async_actions'
-//import { removeSong } from '../../redux/actions/sync_actions'
+import { fetchAll, asyncRemoveSong } from '../../redux/actions/async_actions'
 
 class SongList extends Component{
 	
 	componentDidMount(){
-		this.props.dispatch(fetchAllSongs())
+		this.props.dispatch(fetchAll())
 	}
 
 	renderSongs(){	
@@ -43,7 +42,7 @@ class SongList extends Component{
 
 const mapStateToProps = (state) => {
 	return {
-		songs: state.songs
+		songs: state.songs,
 	}
 }
 

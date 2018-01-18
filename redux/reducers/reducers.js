@@ -3,7 +3,8 @@ const {
 	REMOVE_SONG,
 	ADD_LYRIC,
 	LIKE_LYRIC,
-	ADD_SONGS
+	ADD_SONGS,
+	ADD_LYRICS
 } = require('../actions/sync_actions')
 
 let lyricId = 0
@@ -48,6 +49,10 @@ const lyricReducer = (state = [], action) => {
 				...state.slice(0, index),
 				Object.assign({}, state[index], {likes: state[index].likes + 1}),
 				...state.slice(index + 1, state.length)
+			]
+		case ADD_LYRICS:
+			return [
+				...action.lyrics
 			]
 		default:
 			return state

@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-// import { graphql } from 'react-apollo'
-// import query from '../queries/findSong'
 import { Link } from 'react-router'
 import LyricCreate from './create_lyric'
 import LyricList from './lyric_list'
@@ -11,8 +9,22 @@ const getSong = (id, songs) => {
 }
 
 const getLyricsForSong = (id, lyrics) => {
-	return lyrics.filter((lyric) => lyric.songId === id)
+	return lyrics.filter((lyric) => lyric.song !== null && lyric.song.id === id)
 }
+
+// class SongDetail extends Component {
+// 	render(){
+// 		const { song, lyrics } = this.props
+// 		return (
+// 			<div>
+// 			 	<Link to="/">Back</Link>
+// 	 			<h1>{ song.title }</h1>
+// 	 			<LyricList lyrics={ lyrics }/>
+// 	 			<LyricCreate songId={ song.id }/>
+// 	 		</div>
+// 		)
+// 	}
+// }
 
 const SongDetail = (props) => {
 	const { song, lyrics } = props 

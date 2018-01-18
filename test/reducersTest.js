@@ -1,7 +1,7 @@
 const assert = require('assert')
 const deepFreeze = require('deep-freeze')
 const { songReducer, lyricReducer } = require('../redux/reducers/reducers')
-const { ADD_SONG, REMOVE_SONG, ADD_LYRIC, LIKE_LYRIC, ADD_SONGS } = require('../redux/actions/sync_actions')
+const { ADD_SONG, REMOVE_SONG, ADD_LYRIC, LIKE_LYRIC, ADD_SONGS, ADD_LYRICS } = require('../redux/actions/sync_actions')
 
 describe('songReducer', () => {
 	it('adds new song', () => {
@@ -140,6 +140,33 @@ describe('lyricReducer', () => {
 		deepFreeze(stateBefore)
 		deepFreeze(action)
 		
+		assert.deepEqual(lyricReducer(stateBefore, action), stateAfter)
+	})
+
+	it('initiate lyrics', () => {
+		const stateBefore = []
+		const action = {
+			type: ADD_LYRICS,
+			lyrics:[{
+				id: 0,
+				content: 'Pepsi',
+				songId: 1,
+				likes: 0 
+			}]
+		}
+
+		const stateAfter = [
+			{
+				id: 0,
+				content: 'Pepsi',
+				songId: 1,
+				likes: 0
+			}
+		]
+
+		deepFreeze(stateBefore)
+		deepFreeze(action)
+
 		assert.deepEqual(lyricReducer(stateBefore, action), stateAfter)
 	})
 })

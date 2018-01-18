@@ -22,6 +22,19 @@ const RootQuery = new GraphQLObjectType({
         return Song.findById(id);
       }
     },
+    lyrics: {
+      type: new GraphQLList(LyricType),
+      resolve(){
+        return Lyric.find({})
+      }
+    },
+    findLyrics: {
+      type: new GraphQLList(LyricType),
+      args: { id: { type: new GraphQLNonNull(GraphQLID) } },
+      resolve(parentValue, { id }){
+        return Song.findLyrics(id)
+      }
+    },
     lyric: {
       type: LyricType,
       args: { id: { type: new GraphQLNonNull(GraphQLID) } },

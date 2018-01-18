@@ -18,10 +18,33 @@ const findSongQuery = `
 			}
 		}
 	}
+`
+const findLyrics = `
+	query FindLyrics($id: ID!){
+		findLyrics(id: $id){
+			id,
+			content,
+			likes
+		}
+	}
 `	
+const allLyricsQuery = `
+{
+	lyrics {
+		id,
+		content,
+		likes,
+		song {
+			id
+		}
+	}
+}
+`
 
 module.exports = {
 	allSongsQuery,
-	findSongQuery
+	findSongQuery,
+	findLyrics,
+	allLyricsQuery
 }
 

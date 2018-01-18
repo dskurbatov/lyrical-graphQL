@@ -3,18 +3,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { store } from '../redux/store'
 import { Provider } from 'react-redux'
-// import { ApolloProvider } from 'react-apollo'
-// import ApolloClient from 'apollo-client'
 import { Router, Route, hashHistory, IndexRoute } from 'react-router'
 
 import SongList from './components/song_list' 
 import App from './components/app' 
 import SongCreate from './components/create_song'
 import SongDetail from './components/song_detail'
-
-// const client = new ApolloClient({
-// 	dataIdFromObject: o => o.id
-// })
 
 const Root = () => {
   return (
