@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link, hashHistory } from 'react-router'
 import { connect } from 'react-redux'
-import { query } from '../queries/fetchSongs'
+// import { query } from '../queries/queries'
 import { asyncAddSong } from '../../redux/actions/async_actions'
 
 const SongCreate = (props) => {

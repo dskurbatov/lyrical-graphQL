@@ -1,17 +1,12 @@
 const { addSong, removeSong, initSongs } = require('./sync_actions')
 const { request } = require('graphql-request')
-const { query } = require('../../client/queries/fetchSongs')
+const { allSongsQuery } = require('../../client/queries/queries')
+const { addSongMutation } = require('../../client/mutations/mutations')
 const endpoint = 'http://localhost:4000/graphql'
-
-const mutation = `mutation AddSong($title: String!){
-	addSong(title: $title){
-		id
-	}
-}`
 
 function asyncAddSong(title){
 	return function (dispatch){
-		return request(endpoint, mutation, { title })
+		return request(endpoint, addSongMutation, { title })
 			.then(({ addSong: { id } }) => dispatch(addSong(title, id)))
 	}
 }
@@ -25,7 +20,7 @@ function asyncRemoveSong(id){
 
 const fetchAllSongs = () => {
 	return (dispatch) => {
-		return request(endpoint, query)
+		return request(endpoint, allSongsQuery)
 			.then(({songs}) => dispatch(initSongs(songs)))
 	}
 }
