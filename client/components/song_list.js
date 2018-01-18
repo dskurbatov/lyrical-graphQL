@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import { fetchAllSongs } from '../../redux/actions/async_actions'
-import { removeSong } from '../../redux/actions/sync_actions'
+import { fetchAllSongs, asyncRemoveSong } from '../../redux/actions/async_actions'
+//import { removeSong } from '../../redux/actions/sync_actions'
 
 class SongList extends Component{
 	
@@ -10,11 +10,7 @@ class SongList extends Component{
 		this.props.dispatch(fetchAllSongs())
 	}
 
-	renderSongs(){
-		if(this.props.songs.length === 0){
-			return <div>Loading...</div>
-		}
-		
+	renderSongs(){	
 		return this.props.songs.map(({id, title }) => {
 			return(
 				<li key={id} className="collection-item">
@@ -23,7 +19,7 @@ class SongList extends Component{
 					</Link>
 					<i 
  						className="material-icons"
- 						onClick={() => this.props.dispatch(removeSong(id))}
+ 						onClick={() => this.props.dispatch(asyncRemoveSong(id))}
  					>delete</i>
  				</li>
  			) 
