@@ -6,7 +6,7 @@ const {
 	ADD_SONGS
 } = require('../actions/sync_actions')
 
-let index = 0, lyricId = 0
+let lyricId = 0
 
 const songReducer = (state = [], action) => {
 	console.log(state, action)
@@ -15,7 +15,7 @@ const songReducer = (state = [], action) => {
 			return [
 				...state,
 				{
-					id: String(index++),
+					id: action.id,
 					title: action.title
 				}
 			]

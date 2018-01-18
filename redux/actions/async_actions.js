@@ -3,10 +3,16 @@ const { request } = require('graphql-request')
 const { query } = require('../../client/queries/fetchSongs')
 const endpoint = 'http://localhost:4000/graphql'
 
+const mutation = `mutation AddSong($title: String!){
+	addSong(title: $title){
+		id
+	}
+}`
+
 function asyncAddSong(title){
 	return function (dispatch){
-		return request(endpoint, mutation, variables)
-			.then(({ id }) => dispatch(addSong(title, id)))
+		return request(endpoint, mutation, { title })
+			.then(({ addSong: { id } }) => dispatch(addSong(title, id)))
 	}
 }
 
@@ -25,5 +31,6 @@ const fetchAllSongs = () => {
 }
 
 module.exports = {
+	asyncAddSong,
 	fetchAllSongs
 }

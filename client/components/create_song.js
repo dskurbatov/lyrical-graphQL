@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link, hashHistory } from 'react-router'
 import { connect } from 'react-redux'
 import { query } from '../queries/fetchSongs'
-import { addSong } from '../../redux/actions/sync_actions'
+import { asyncAddSong } from '../../redux/actions/async_actions'
 
 const SongCreate = (props) => {
 	let textInput;
@@ -10,7 +10,7 @@ const SongCreate = (props) => {
 	const onClick = (e) => {
 		e.preventDefault()
 
-		props.dispatch(addSong(textInput.value))
+		props.dispatch(asyncAddSong(textInput.value))
 
 		hashHistory.push('/')
 	}

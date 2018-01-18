@@ -15,7 +15,8 @@ describe('songReducer', () => {
 
 		const action = {
 			type: ADD_SONG, 
-			title: 'Coca Cola'
+			title: 'Coca Cola',
+			id: "0"
 		}
 
 		deepFreeze(stateBefore)

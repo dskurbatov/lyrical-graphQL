@@ -4,10 +4,11 @@ const ADD_LYRIC = 'ADD_LYRIC'
 const LIKE_LYRIC = 'LIKE_LYRIC'
 const ADD_SONGS = 'ADD_SONGS'
 
-const addSong = (title) => {
+const addSong = (title, id) => {
 	return {
 		type: ADD_SONG,
-		title
+		title,
+		id
 	}
 }
 
