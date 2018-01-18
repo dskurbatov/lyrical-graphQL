@@ -1,4 +1,4 @@
-const { addSong, removeSong, allSongs } = require('./sync_actions')
+const { addSong, removeSong, initSongs } = require('./sync_actions')
 const { request } = require('graphql-request')
 const { query } = require('../../client/queries/fetchSongs')
 const endpoint = 'http://localhost:4000/graphql'
@@ -20,7 +20,7 @@ function asyncRemoveSong(id){
 const fetchAllSongs = () => {
 	return (dispatch) => {
 		return request(endpoint, query)
-			.then(({songs}) => dispatch(allSongs(songs)))
+			.then(({songs}) => dispatch(initSongs(songs)))
 	}
 }
 

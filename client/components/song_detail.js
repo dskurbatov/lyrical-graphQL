@@ -34,28 +34,3 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 export default connect(mapStateToProps)(SongDetail)
-// const SongDetail = (props) => {
-// 	const { song } = props.data
-	
-// 	if(!song) {
-// 		return <div>Loading...</div>
-// 	}
-
-// 	return (
-// 		<div>
-// 			<Link to="/">Back</Link>
-// 			<h1>{ song.title }</h1>
-// 			<LyricList lyrics={ song.lyrics }/>
-// 			<LyricCreate songId={ song.id }/>
-// 		</div>
-		
-// 	)
-// }
-
-// export default graphql(query, {
-// 	options: (ownProps) => {
-// 		return {
-// 			variables: { id: ownProps.params.id }
-// 		}
-// 	} 
-// })(SongDetail)
