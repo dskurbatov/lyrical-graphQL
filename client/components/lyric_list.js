@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { likeLyric } from '../../redux/actions/sync_actions'
 // import gql from 'graphql-tag'
 // import { graphql } from 'react-apollo'
 
 const LyricList = (props) => {
+	const { lyrics, dispatch } = props
+
 	return (
 		<ul className="collection">
-			{props.lyrics.map(({ id, content, likes }) => {
+			{lyrics.map(({ id, content, likes }) => {
 				return (
 					<li 
 	 					key={id}
@@ -14,7 +18,7 @@ const LyricList = (props) => {
 	 					<div className="vote-box">
 	 						<i 
 	 							className="material-icons"
-	 							//onClick={() => onClick(id)}
+	 							onClick={() => dispatch(likeLyric(id))}
 	 						>thumb_up</i>
 	 						{likes}
 	 					</div>
@@ -25,7 +29,7 @@ const LyricList = (props) => {
 	)
 }
 
-export default LyricList
+export default connect()(LyricList)
 // const LyricList = (props) => {
 	
 // 	const onClick = (id) => {

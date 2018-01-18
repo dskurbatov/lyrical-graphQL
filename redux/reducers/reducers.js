@@ -1,8 +1,8 @@
 const {
 	ADD_SONG,
 	REMOVE_SONG,
-	ADD_LYRIC
-	// LIKE_LYRIC
+	ADD_LYRIC,
+	LIKE_LYRIC
 } = require('../actions/sync_actions')
 
 let index = 0, lyricId = 0
@@ -37,13 +37,13 @@ const lyricReducer = (state = [], action) => {
 					likes: 0
 				}
 			]
-		// case LIKE_LYRIC:
-		// 	const index = state.indexof({id: action.id})
-		// 	return [
-		// 		...state.slice(0, index),
-		// 		state[index].likes++,
-		// 		...state.slice(index+ 1, state.length)
-		// 	]
+		case LIKE_LYRIC:
+			const index = state.findIndex(lyric => lyric.id === action.id)
+			return [
+				...state.slice(0, index),
+				Object.assign({}, state[index], {likes: state[index].likes + 1}),
+				...state.slice(index+1, state.length)
+			]
 		default:
 			return state
 	}

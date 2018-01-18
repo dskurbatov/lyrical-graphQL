@@ -6,12 +6,14 @@ import { addLyric } from '../../redux/actions/sync_actions'
 
 
 const LyricCreate = (props) => {
+	const { songId, dispatch } = props
 	let textInput
 	
 	const onClick = (e) => {
 		e.preventDefault()
 
-		props.dispatch(addLyric(textInput.value, props.songId))
+		dispatch(addLyric(textInput.value, songId))
+		textInput.value = ''
 	}
 
 	return(

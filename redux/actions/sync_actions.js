@@ -1,7 +1,7 @@
 const ADD_SONG = 'ADD_SONG'
 const REMOVE_SONG = 'REMOVE_SONG'
 const ADD_LYRIC = 'ADD_LYRIC'
-//export const LIKE_LYRIC = 'LIKE_LYRIC'
+const LIKE_LYRIC = 'LIKE_LYRIC'
 
 const addSong = (title) => {
 	return {
@@ -25,11 +25,20 @@ const addLyric = (content, songId) => {
 	}
 }
 
+const likeLyric = (id) => {
+	return {
+		type: LIKE_LYRIC,
+		id
+	}
+}
+
 
 module.exports = {
 	ADD_SONG,
 	REMOVE_SONG,
 	ADD_LYRIC,
+	LIKE_LYRIC,
+	likeLyric,
 	addLyric,
 	addSong,
 	removeSong
