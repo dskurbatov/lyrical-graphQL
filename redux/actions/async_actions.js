@@ -1,7 +1,7 @@
-const { addSong, removeSong, initSongs, initLyrics } = require('./sync_actions')
+const { addSong, removeSong, initSongs, initLyrics, addLyric } = require('./sync_actions')
 const { request } = require('graphql-request')
 const { allSongsQuery, allLyricsQuery } = require('../../client/queries/queries')
-const { addSongMutation, removeSongMutation } = require('../../client/mutations/mutations')
+const { addSongMutation, removeSongMutation, addLyricMutation } = require('../../client/mutations/mutations')
 const endpoint = 'http://localhost:4000/graphql'
 
 function asyncAddSong(title){
@@ -18,6 +18,13 @@ function asyncRemoveSong(id){
 	}
 }
 
+function asyncAddLyric(content, songId){
+	return function(dispatch){
+		return request(endpoint, addLyricMutation, { content, songId })
+			.then(({ addLyricToSong: { id }}) => dispatch(addLyric(content, songId, id)))
+	}
+}
+
 const fetchAllSongs = () => {
 	return (dispatch) => {
 		return request(endpoint, allSongsQuery)
@@ -27,9 +34,8 @@ const fetchAllSongs = () => {
 
 const fetchAll = () => {
 	return (dispatch) => {
-		return Promise.all([request(endpoint, allSongsQuery), request(endpoint, allLyricsQuery)])
-		
-		.then(([{ songs } , { lyrics }]) => {
+		return Promise.all([request(endpoint, allSongsQuery), request(endpoint, allLyricsQuery)])	
+		.then(([{ songs }, { lyrics }]) => {
 			dispatch(initSongs(songs))
 			dispatch(initLyrics(lyrics))
 		})
@@ -40,5 +46,6 @@ module.exports = {
 	fetchAll,
 	asyncAddSong,
 	asyncRemoveSong,
-	fetchAllSongs
+	fetchAllSongs,
+	asyncAddLyric
 }

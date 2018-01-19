@@ -86,13 +86,15 @@ describe('lyricReducer', () => {
 			type: ADD_LYRIC,
 			id: 0,
 			content: 'I love coca cola',
-			songId: 1
+			song: 1
 		}
 		const stateAfter = [
 			{
 				id: 0,
 				content: 'I love coca cola',
-				songId: 1,
+				song:{
+					id: 1
+				},
 				likes: 0
 			}
 		]

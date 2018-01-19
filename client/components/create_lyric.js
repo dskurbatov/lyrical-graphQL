@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { addLyric } from '../../redux/actions/sync_actions'
+import { asyncAddLyric } from '../../redux/actions/async_actions'
 
 const LyricCreate = (props) => {
 	const { songId, dispatch } = props
@@ -9,7 +9,7 @@ const LyricCreate = (props) => {
 	const onClick = (e) => {
 		e.preventDefault()
 
-		dispatch(addLyric(textInput.value, songId))
+		dispatch(asyncAddLyric(textInput.value, songId))
 		textInput.value = ''
 	}
 

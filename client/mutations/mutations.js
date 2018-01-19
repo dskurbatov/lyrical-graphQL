@@ -12,8 +12,16 @@ mutation RemoveSong($id: ID!){
 	}
 }
 `
+const addLyricMutation = `
+	mutation AddLyric($content: String!, $songId: ID!){
+		addLyricToSong(content: $content, songId: $songId){
+			id
+		}
+	}
+`
 
 module.exports = {
 	addSongMutation,
-	removeSongMutation
+	removeSongMutation,
+	addLyricMutation
 }

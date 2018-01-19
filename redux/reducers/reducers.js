@@ -7,8 +7,6 @@ const {
 	ADD_LYRICS
 } = require('../actions/sync_actions')
 
-let lyricId = 0
-
 const songReducer = (state = [], action) => {
 	console.log(state, action)
 	switch(action.type){
@@ -37,9 +35,12 @@ const lyricReducer = (state = [], action) => {
 			return [
 				...state,
 				{
-					id: String(lyricId++),
+					id: action.id,
 					content: action.content,
-					songId: action.songId,
+					song: {
+						id: action.song
+					},
+					
 					likes: 0
 				}
 			]

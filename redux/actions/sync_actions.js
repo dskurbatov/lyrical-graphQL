@@ -20,11 +20,12 @@ const removeSong = (id) => {
 	}
 }
 
-const addLyric = (content, songId) => {
+const addLyric = (content, song, id) => {
 	return {
 		type: ADD_LYRIC,
+		id,
 		content,
-		songId
+		song
 	}
 }
 

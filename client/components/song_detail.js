@@ -12,22 +12,8 @@ const getLyricsForSong = (id, lyrics) => {
 	return lyrics.filter((lyric) => lyric.song !== null && lyric.song.id === id)
 }
 
-// class SongDetail extends Component {
-// 	render(){
-// 		const { song, lyrics } = this.props
-// 		return (
-// 			<div>
-// 			 	<Link to="/">Back</Link>
-// 	 			<h1>{ song.title }</h1>
-// 	 			<LyricList lyrics={ lyrics }/>
-// 	 			<LyricCreate songId={ song.id }/>
-// 	 		</div>
-// 		)
-// 	}
-// }
-
 const SongDetail = (props) => {
-	const { song, lyrics } = props 
+	const { song, lyrics } = props
 	return (
 		<div>
 		 	<Link to="/">Back</Link>
