@@ -18,9 +18,6 @@ const addLyricMutation = `
 			id
 			content
 			likes
-			song {
-				id
-			}
 		}
 	}
 `

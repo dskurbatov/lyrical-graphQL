@@ -22,6 +22,7 @@ function asyncAddLyric(content, songId){
 	return function(dispatch){
 		return request(endpoint, addLyricMutation, { content, songId })
 			.then(({ addLyricToSong: { id }}) => dispatch(addLyric(content, songId, id)))
+			.catch((error) => console.log(error))
 	}
 }
 
