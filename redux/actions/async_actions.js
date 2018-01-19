@@ -1,7 +1,7 @@
-const { addSong, removeSong, initSongs, initLyrics, addLyric } = require('./sync_actions')
+const { addSong, removeSong, initSongs, initLyrics, addLyric, likeLyric } = require('./sync_actions')
 const { request } = require('graphql-request')
 const { allSongsQuery, allLyricsQuery } = require('../../client/queries/queries')
-const { addSongMutation, removeSongMutation, addLyricMutation } = require('../../client/mutations/mutations')
+const { addSongMutation, removeSongMutation, addLyricMutation, likeLyricMutation } = require('../../client/mutations/mutations')
 const endpoint = 'http://localhost:4000/graphql'
 
 function asyncAddSong(title){
@@ -22,6 +22,14 @@ function asyncAddLyric(content, songId){
 	return function(dispatch){
 		return request(endpoint, addLyricMutation, { content, songId })
 			.then(({ addLyricToSong: { id }}) => dispatch(addLyric(content, songId, id)))
+	}
+}
+
+function asyncLikeLyric(id){
+	return function(dispatch){
+		dispatch(likeLyric(id))
+		return request(endpoint, likeLyricMutation, { id })
+			.then(data => data)
 	}
 }
 
@@ -47,5 +55,6 @@ module.exports = {
 	asyncAddSong,
 	asyncRemoveSong,
 	fetchAllSongs,
-	asyncAddLyric
+	asyncAddLyric,
+	asyncLikeLyric
 }

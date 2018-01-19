@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { likeLyric } from '../../redux/actions/sync_actions'
+import { asyncLikeLyric } from '../../redux/actions/async_actions'
 
 const LyricList = (props) => {
 	const { lyrics, dispatch } = props
@@ -16,7 +16,7 @@ const LyricList = (props) => {
 	 					<div className="vote-box">
 	 						<i 
 	 							className="material-icons"
-	 							onClick={() => dispatch(likeLyric(id))}
+	 							onClick={() => dispatch(asyncLikeLyric(id))}
 	 						>thumb_up</i>
 	 						{likes}
 	 					</div>

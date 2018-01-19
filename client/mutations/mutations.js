@@ -16,6 +16,21 @@ const addLyricMutation = `
 	mutation AddLyric($content: String!, $songId: ID!){
 		addLyricToSong(content: $content, songId: $songId){
 			id
+			content
+			likes
+			song {
+				id
+			}
+		}
+	}
+`
+
+const likeLyricMutation = `
+	mutation LikeLyric($id: ID!){
+		likeLyric(id: $id){
+			id
+			content
+			likes
 		}
 	}
 `
@@ -23,5 +38,6 @@ const addLyricMutation = `
 module.exports = {
 	addSongMutation,
 	removeSongMutation,
-	addLyricMutation
+	addLyricMutation,
+	likeLyricMutation
 }
