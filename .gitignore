@@ -1,2 +1,4 @@
 node_modules
 .DS_STORE
+# don't include mongo data/db files
+data/db
