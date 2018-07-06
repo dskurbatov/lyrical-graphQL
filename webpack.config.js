@@ -1,4 +1,3 @@
-const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -6,11 +5,6 @@ module.exports = {
   output: {
     path: '/',
     filename: 'bundle.js'
-  },
-  devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    compress: true,
-    port: 4000
   },
   module: {
     rules: [
