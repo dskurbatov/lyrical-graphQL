@@ -8,9 +8,10 @@
     "url": "https://github.com/StephenGrider/Lyrical-GraphQL"
   },
   "scripts": {
-    "prestart": "docker run -p 27017:27017 -v $(pwd)/data/db:/data/db -d mongo",
+    "prestart": "./script/docker.sh && npm run build",
     "start": "npm run dev",
-    "dev": "nodemon index.js --ignore client"
+    "dev": "nodemon index.js --ignore client",
+    "build": "webpack-dev-server"
   },
   "author": "",
   "license": "ISC",
@@ -48,6 +49,7 @@
   },
   "devDependencies": {
     "deep-freeze": "0.0.1",
-    "mocha": "^4.1.0"
+    "mocha": "^4.1.0",
+    "webpack-dev-server": "^3.1.4"
   }
 }
