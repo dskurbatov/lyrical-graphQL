@@ -8,9 +8,8 @@
     "url": "https://github.com/StephenGrider/Lyrical-GraphQL"
   },
   "scripts": {
-    "prestart": "echo \"starting application\"",
-    "start": "nodemon index.js",
-    "poststart": "echo \"application has been started\"",
+    "prestart": "docker run -p 27017:27017 -v $(pwd)/data/db:/data/db -d mongo",
+    "start": "npm run dev",
     "dev": "nodemon index.js --ignore client"
   },
   "author": "",
